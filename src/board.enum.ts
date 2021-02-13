@@ -1,0 +1,30 @@
+export enum Board {
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+	FIVE,
+	SIX,
+	SEVEN,
+	HEIGHT,
+	NINE,
+	TEN,
+	ELEVEN,
+	TWELVE,
+	THIRTEEN,
+	FOURTEEN,
+	FIFTEEN,
+	SIXTEEN,
+	SEVENTEEN,
+	HEIGHTEEN,
+	NINETEEN,
+	TWENTY,
+	CENTER,
+	BULSEYE,
+}
+
+export enum BoardZone {
+	NORMAL,
+	TIMESONE,
+	TIMESTWO,
+}

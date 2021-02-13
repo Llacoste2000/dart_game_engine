@@ -1,4 +1,4 @@
-import { AroundTheWorld } from "./TDM.gamemode";
+import { AroundTheWorld } from "./gamemodes/aroundtheworld";
 import { Player } from "./player";
 
 let player1 = new Player("louis", "louis@louis.com", 0, 0);
