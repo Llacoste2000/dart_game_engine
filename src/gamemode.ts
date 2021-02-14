@@ -29,23 +29,6 @@ export class GameModeBase {
     startGame(): void {
     }
 
-    // async loop(callbak: Function): Promise<void> {
-    //     do {
-    //         let res = false;
-    //         let playingPlayer = this.players[this.turn % this.players.length];
-    //         console.log(`---------------------------`);
-    //         console.log(`C'est au tour de ${playingPlayer.name}`);
-    //         console.log(`   Le score de ${playingPlayer.name} est ${playingPlayer.score}`);
-    //         do {
-    //             console.log(`Il reste ${this.remainingShots} tirs à ${playingPlayer.name}`)
-    //             const shot = await playingPlayer.play();
-    //             res = callbak(playingPlayer, shot);
-    //             this.nextShot();
-    //         } while (this.remainingShots !== 0 && !res && !this.end);
-    //         this.nextTurn();
-    //     } while (!this.end);
-    // }
-
     /**
      * Play next turn until no shots remaining
      */
@@ -76,8 +59,9 @@ export class GameModeBase {
     }
 
     /**
-     * Shuffles array in place. ES6 version
-     * @param {Array} array items An array containing the items.
+     * Shuffles array
+     * @param {Array} array - Array to shuffle.
+     * @returns {Array} - Array shuffled
      */
     shuffle(array: any): Array<any> {
         for (let i = array.length - 1; i > 0; i--) {

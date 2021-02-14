@@ -11,9 +11,6 @@ export class AroundTheWorld extends GameModeBase {
 
 
     async startGame(): Promise<void> {
-
-        // this.loop(this.checkStage).catch(reason => console.error(reason));
-
         // TODO: Refactoring logs when production
         do {
             let playingPlayer = this.players[this.turn % this.players.length];
