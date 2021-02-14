@@ -14,38 +14,31 @@ export class GameModeBase {
         this.remainingShots = remainingShots;
     }
 
+    init(): any {
+        if (this.players.length <= 1) {
+            console.log(`Vous devez avoir au moins 2 joueurs opour faire une partie.`)
+        } else {
+            this.startGame();
+        }
+    }
+
     /**
      * Start the game, players play turn by turn
      */
     startGame(): void {
     }
 
-    // async loop(callback: Function): Promise<void> {
-    //     do {
-    //         let res = false;
-    //         let playerTurn = this.players[this.turn % this.players.length];
-    //         console.log(`C'est au tour de ${playerTurn.name}`);
-    //         console.log(`Le score de ${playerTurn.name} est ${playerTurn.score}`);
-    //         do {
-    //             const shot = await playerTurn.play();
-    //             res = callback(playerTurn, shot);
-    //             console.log('shot', shot);
-    //             console.log('res', res);
-    //             this.nextShot();
-    //         } while (this.remainingShots !== 0 && !res);
-    //         this.nextTurn();
-    //     } while (!this.end);
-    // }
-
-
     /**
-     * Play next turn
+     * Play next turn until no shots remaining
      */
     nextTurn(): void {
         this.turn++;
         this.remainingShots = 3;
     }
 
+    /**
+     * Play the next shot
+     */
     nextShot(): void {
         this.remainingShots--;
     }
@@ -58,7 +51,7 @@ export class GameModeBase {
     }
 
     /**
-     * Retourne de score des tous les joueurs
+     * Get all playing players
      */
     getPlayers(): Array<Player> {
         return this.players;

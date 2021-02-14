@@ -9,27 +9,36 @@ export class AroundTheWorld extends GameModeBase {
         this.players.forEach(element => element.setScore(null));
     }
 
+    /**
+     * Start the game, players play turn by turn
+     */
     async startGame(): Promise<void> {
+        // TODO: Refactoring logs
         do {
             let res = false;
-            let playerTurn = this.players[this.turn % this.players.length];
+            let playingPlayer = this.players[this.turn % this.players.length];
             console.log(`---------------------------`);
-            console.log(`C'est au tour de ${playerTurn.name}`);
-            console.log(`   Le score de ${playerTurn.name} est ${playerTurn.score}`);
+            console.log(`C'est au tour de ${playingPlayer.name}`);
+            console.log(`   Le score de ${playingPlayer.name} est ${playingPlayer.score}`);
             do {
-                console.log(this.remainingShots);
-                const shot = await playerTurn.play();
-                res = this.checkStage(playerTurn, shot);
+                console.log(`Il reste ${this.remainingShots} tirs à ${playingPlayer.name}`)
+                const shot = await playingPlayer.play();
+                res = this.checkStage(playingPlayer, shot);
                 this.nextShot();
             } while (this.remainingShots !== 0 && !res);
-            if (playerTurn.score == Board.TWENTY) {
-                console.log(`Le joueur ${playerTurn.name} as gagné la partie !`);
+            if (playingPlayer.score == Board.TWENTY) {
+                console.log(`Le joueur ${playingPlayer.name} as gagné la partie !`);
                 this.endGame();
             }
             this.nextTurn();
         } while (!this.end);
     }
 
+    /**
+     *
+     * @param {Player} player - the player shooting
+     * @param playerShot - The shot informations of the current playing player
+     */
     checkStage(player: Player, playerShot: any): boolean {
 
         console.log(player.score, playerShot[0] - 1);
