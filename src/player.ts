@@ -36,8 +36,4 @@ export class Player {
 			resolve([Board[Board[board]], BoardZone[BoardZone[zone]]]);
 		});
 	}
-
-	setScore(score: any): void {
-		this.score = score;
-	}
 }
