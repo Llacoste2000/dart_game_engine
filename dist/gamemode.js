@@ -1,33 +1,25 @@
-import {Player} from "./player";
-
-export class GameModeBase {
-    players: Array<Player>;
-    turn: number;
-    end: boolean;
-    remainingShots: number;
-
-
-    constructor(players: Array<Player>, turn: any = 0, end: any = false, remainingShots: number = 3) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GameModeBase = void 0;
+class GameModeBase {
+    constructor(players, turn = 0, end = false, remainingShots = 3) {
         this.players = players;
         this.turn = turn;
         this.end = end;
         this.remainingShots = remainingShots;
     }
-
-    init(): any {
+    init() {
         // if (this.players.length <= 1) {
         //     console.log(`Vous devez avoir au moins 2 joueurs pour faire une partie.`)
         // } else {
         this.startGame();
         // }
     }
-
     /**
      * Start the game, players play turn by turn
      */
-    startGame(): void {
+    startGame() {
     }
-
     // async loop(callbak: Function): Promise<void> {
     //     do {
     //         let res = false;
@@ -44,33 +36,30 @@ export class GameModeBase {
     //         this.nextTurn();
     //     } while (!this.end);
     // }
-
     /**
      * Play next turn until no shots remaining
      */
-    nextTurn(): void {
+    nextTurn() {
         this.turn++;
         this.remainingShots = 3;
     }
-
     /**
      * Play the next shot
      */
-    nextShot(): void {
+    nextShot() {
         this.remainingShots--;
     }
-
     /**
      * End the game loop
      */
-    endGame(): void {
+    endGame() {
         this.end = true;
     }
-
     /**
      * Get all playing players
      */
-    getPlayers(): Array<Player> {
+    getPlayers() {
         return this.players;
     }
 }
+exports.GameModeBase = GameModeBase;

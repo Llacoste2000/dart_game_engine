@@ -21,12 +21,17 @@ export class Player {
      */
     play(): Promise<any> {
         return new Promise<any>((resolve) => {
-            let board = readline.question(`What was your shot ?`);
-            let zone = readline.question(`What was the zone ?`);
+            let board, zone;
 
-            console.log(`Your shot was ${Board[board - 1]} on the zone ${BoardZone[zone - 1]}`);
+            do {
+                board = readline.question(`Quel est le chiffre  ?`);
+                zone = readline.question(`Quelle est la zone ?`);
+
+            } while (Board[board] === undefined || BoardZone[zone] === undefined);
+
+            console.log(`Ton tir est ${Board[board]} dans la zone ${BoardZone[zone]}`);
             // @ts-ignore
-            resolve([Board[Board[board - 1]], BoardZone[BoardZone[zone - 1]]]);
+            resolve([Board[Board[board]], BoardZone[BoardZone[zone]]]);
         });
     }
 
