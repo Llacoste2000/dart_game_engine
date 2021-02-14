@@ -7,4 +7,3 @@ let player3 = new Player("julien", "julien@julien.com", 0, 0);
 
 let tho = new ThreeHundredOne([player1]);
 
-tho.init();

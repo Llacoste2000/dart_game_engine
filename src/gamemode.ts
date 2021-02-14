@@ -18,6 +18,7 @@ export class GameModeBase {
         // if (this.players.length <= 1) {
         //     console.log(`Vous devez avoir au moins 2 joueurs pour faire une partie.`)
         // } else {
+        this.players = this.shuffle(this.players);
         this.startGame();
         // }
     }
@@ -72,5 +73,17 @@ export class GameModeBase {
      */
     getPlayers(): Array<Player> {
         return this.players;
+    }
+
+    /**
+     * Shuffles array in place. ES6 version
+     * @param {Array} array items An array containing the items.
+     */
+    shuffle(array: any): Array<any> {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
 }
