@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "@types/readline-sync": "^1.4.3",
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
   }
 }

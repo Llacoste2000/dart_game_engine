@@ -19,12 +19,12 @@ export class GameModeBase {
 	}
 
 	init(): any {
-		if (this.players.length <= 1) {
-			console.log(`Vous devez avoir au moins 2 joueurs pour faire une partie.`);
-		} else {
-			this.players = this.shuffle(this.players);
-			this.startGame();
-		}
+		// if (this.players.length <= 1) {
+		// 	console.log(`Vous devez avoir au moins 2 joueurs pour faire une partie.`);
+		// } else {
+		this.players = this.shuffle(this.players);
+		this.startGame();
+		// }
 	}
 
 	/**

@@ -88,6 +88,7 @@ export class Cricket extends GameModeBase {
 		Object.keys(player.score.gates).map((element) => {
 			playerGatesStr += player.score.gates[element];
 		});
+		console.log(playerGatesStr);
 		if (playerGatesStr === "0000000") {
 			console.log(
 				`${player.name} à fermé toutes les portes ! La partie est terminé.`,

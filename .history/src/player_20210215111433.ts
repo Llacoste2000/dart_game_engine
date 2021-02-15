@@ -20,7 +20,7 @@ export class Player {
 	/**
 	 * Play the turn of the player
 	 */
-	async play(): Promise<any> {
+	play(): Promise<any> {
 		return new Promise<any>((resolve) => {
 			let board, zone;
 
