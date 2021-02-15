@@ -3,27 +3,27 @@ import { GameModeBase } from "../gamemode";
 import { Player } from "../player";
 
 export class Cricket extends GameModeBase {
-	gates: Object;
+	gates: any;
 
 	constructor(
 		players: Array<Player>,
 		remainingShots: number = 3,
 		turn: number = 0,
 		end: boolean = false,
-		gates?: Object,
+		gates?: any,
 	) {
 		super(players, turn, end, remainingShots);
 		this.players.forEach(
 			(element) =>
 				(element.score = {
 					gates: {
-						"20": 3,
-						"19": 3,
-						"18": 3,
-						"17": 3,
-						"16": 3,
-						"15": 3,
-						center: 3,
+						"20": 1,
+						"19": 1,
+						"18": 1,
+						"17": 1,
+						"16": 1,
+						"15": 1,
+						"25": 1,
 					},
 					score: 0,
 				}),
@@ -35,7 +35,7 @@ export class Cricket extends GameModeBase {
 			"17": false,
 			"16": false,
 			"15": false,
-			center: false,
+			"25": false,
 		};
 	}
 
@@ -68,33 +68,35 @@ export class Cricket extends GameModeBase {
 	checkStage(player: Player, playerShot: any) {
 		//TODO: Gérer les tirs pour le mode de jeu Cricket
 
-		console.log(playerShot[0]);
-		console.log(player.score.gates[playerShot[0]]);
-
-		player.score["gates"][playerShot[0]] =
-			player.score.gates[playerShot[0]] - 1;
-
-		console.log(player.score);
-
-		// player.score.gates[playerShot[0]]--
-
-		// if (playerShot[0] === Board["MISSED"]) {
-		// 	console.log(`${player.name} à raté son tir !`);
-		// 	return;
-		// }
-
-		// //Test du score pour la win
-		// let playerGatesStr = "";
-		// Object.keys(player.score.gates).map((element) => {
-		// 	playerGatesStr += player.score.gates[element];
-		// });
-		// console.log(playerGatesStr);
-		// if (playerGatesStr === "0000000") {
-		// 	console.log(
-		// 		`${player.name} à fermé toutes les portes ! La partie est terminé.`,
-		// 	);
-		// 	this.endGame();
-		// 	return;
-		// }
+		if (playerShot[0] === Board["MISSED"]) {
+			console.log(`${player.name} à raté son tir !`);
+			return;
+		}
+		if (player.score["gates"][playerShot[0]] !== 0) {
+			player.score["gates"][playerShot[0]] =
+				player.score.gates[playerShot[0]] - 1;
+			if (player.score["gates"][playerShot[0]] === 0) {
+				console.log(`${player.name} à fermée sa porte ${playerShot[0]}`);
+				if (!this.gates[playerShot[0]]) {
+					console.log(
+						`La porte ${playerShot[0]} à été fermée par ${player.name}`,
+					);
+					this.gates[playerShot[0]] = true;
+					player.score.score += playerShot[0];
+				}
+			}
+		}
+		//Test du score pour la win
+		let playerGatesStr = "";
+		Object.keys(player.score.gates).map((element) => {
+			playerGatesStr += player.score.gates[element];
+		});
+		console.log(playerGatesStr);
+		if (playerGatesStr === "0000000") {
+			console.log(
+				`${player.name} à fermé toutes les portes ! La partie est terminé.`,
+			);
+			this.endGame();
+		}
 	}
 }
