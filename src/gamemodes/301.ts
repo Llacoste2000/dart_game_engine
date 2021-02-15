@@ -10,7 +10,7 @@ export class ThreeHundredOne extends GameModeBase {
 		end: boolean = false,
 	) {
 		super(players, turn, end, remainingShots);
-		this.players.forEach((element) => element.setScore(301));
+		this.players.forEach((element) => (element.score = 301));
 	}
 
 	async startGame(): Promise<void> {
@@ -50,7 +50,7 @@ export class ThreeHundredOne extends GameModeBase {
 		shotScore = playerShot[0] * playerShot[1];
 
 		if (playerShot[1] === 2 && player.score - shotScore == 0) {
-			player.setScore(0);
+			player.score = 0;
 			console.log(`${player.name} à gagné la partie !`);
 			this.endGame();
 			return;
@@ -61,7 +61,7 @@ export class ThreeHundredOne extends GameModeBase {
 			return;
 		}
 
-		player.setScore(player.score - shotScore);
+		player.score = player.score - shotScore;
 		console.log(`le score de ${player.name} est maintenant ${player.score}`);
 	}
 }

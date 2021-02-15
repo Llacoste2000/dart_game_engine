@@ -12,6 +12,7 @@ class GameModeBase {
         // if (this.players.length <= 1) {
         //     console.log(`Vous devez avoir au moins 2 joueurs pour faire une partie.`)
         // } else {
+        this.players = this.shuffle(this.players);
         this.startGame();
         // }
     }
@@ -20,22 +21,6 @@ class GameModeBase {
      */
     startGame() {
     }
-    // async loop(callbak: Function): Promise<void> {
-    //     do {
-    //         let res = false;
-    //         let playingPlayer = this.players[this.turn % this.players.length];
-    //         console.log(`---------------------------`);
-    //         console.log(`C'est au tour de ${playingPlayer.name}`);
-    //         console.log(`   Le score de ${playingPlayer.name} est ${playingPlayer.score}`);
-    //         do {
-    //             console.log(`Il reste ${this.remainingShots} tirs à ${playingPlayer.name}`)
-    //             const shot = await playingPlayer.play();
-    //             res = callbak(playingPlayer, shot);
-    //             this.nextShot();
-    //         } while (this.remainingShots !== 0 && !res && !this.end);
-    //         this.nextTurn();
-    //     } while (!this.end);
-    // }
     /**
      * Play next turn until no shots remaining
      */
@@ -60,6 +45,18 @@ class GameModeBase {
      */
     getPlayers() {
         return this.players;
+    }
+    /**
+     * Shuffles array
+     * @param {Array} array - Array to shuffle.
+     * @returns {Array} - Array shuffled
+     */
+    shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
 }
 exports.GameModeBase = GameModeBase;

@@ -25,8 +25,5 @@ class Player {
             resolve([board_enum_1.Board[board_enum_1.Board[board]], board_enum_1.BoardZone[board_enum_1.BoardZone[zone]]]);
         });
     }
-    setScore(score) {
-        this.score = score;
-    }
 }
 exports.Player = Player;

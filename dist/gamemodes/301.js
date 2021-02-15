@@ -15,7 +15,7 @@ const board_enum_1 = require("../board.enum");
 class ThreeHundredOne extends gamemode_1.GameModeBase {
     constructor(players, remainingShots = 3, turn = 0, end = false) {
         super(players, turn, end, remainingShots);
-        this.players.forEach(element => element.setScore(301));
+        this.players.forEach((element) => (element.score = 301));
     }
     startGame() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -48,7 +48,7 @@ class ThreeHundredOne extends gamemode_1.GameModeBase {
         }
         shotScore = playerShot[0] * playerShot[1];
         if (playerShot[1] === 2 && player.score - shotScore == 0) {
-            player.setScore(0);
+            player.score = 0;
             console.log(`${player.name} à gagné la partie !`);
             this.endGame();
             return;
@@ -57,7 +57,7 @@ class ThreeHundredOne extends gamemode_1.GameModeBase {
             console.log(`${player.name} à raté son tir !`);
             return;
         }
-        player.setScore(player.score - shotScore);
+        player.score = player.score - shotScore;
         console.log(`le score de ${player.name} est maintenant ${player.score}`);
     }
 }

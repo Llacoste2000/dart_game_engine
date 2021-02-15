@@ -9,13 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AroundTheWorld = void 0;
+exports.Cricket = void 0;
+const board_enum_1 = require("./../board.enum");
 const gamemode_1 = require("../gamemode");
-const board_enum_1 = require("../board.enum");
-class AroundTheWorld extends gamemode_1.GameModeBase {
-    constructor(players, remainingShots = 3, turn = 0, end = false) {
+class Cricket extends gamemode_1.GameModeBase {
+    constructor(players, remainingShots = 3, turn = 0, end = false, gates) {
         super(players, turn, end, remainingShots);
-        this.players.forEach((element) => (element.score = null));
+        this.players.forEach((element) => (element.score = {
+            gates: {
+                "20": 1,
+                "19": 1,
+                "18": 1,
+                "17": 1,
+                "16": 1,
+                "15": 1,
+                "25": 1,
+            },
+            score: 0,
+        }));
+        this.gates = {
+            "20": false,
+            "19": false,
+            "18": false,
+            "17": false,
+            "16": false,
+            "15": false,
+            "25": false,
+        };
     }
     startGame() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,7 +44,9 @@ class AroundTheWorld extends gamemode_1.GameModeBase {
                 let playingPlayer = this.players[this.turn % this.players.length];
                 console.log(`---------------------------`);
                 console.log(`C'est au tour de ${playingPlayer.name}`);
-                console.log(`   Le score de ${playingPlayer.name} est ${playingPlayer.score}`);
+                console.log(`   Le score de ${playingPlayer.name} est`);
+                console.log("   PORTES:", playingPlayer.score.gates);
+                console.log("   SCORE:", playingPlayer.score.score);
                 do {
                     console.log(`Il reste ${this.remainingShots} tirs à ${playingPlayer.name}`);
                     const shot = yield playingPlayer.play();
@@ -41,20 +63,33 @@ class AroundTheWorld extends gamemode_1.GameModeBase {
      * @param playerShot - The shot informations of the current playing player
      */
     checkStage(player, playerShot) {
+        //TODO: Gérer les tirs pour le mode de jeu Cricket
         if (playerShot[0] === board_enum_1.Board["MISSED"]) {
             console.log(`${player.name} à raté son tir !`);
             return;
         }
-        if ((player.score === null && playerShot[0] === board_enum_1.Board["ONE"]) ||
-            player.score + 1 === playerShot[0]) {
-            console.log(`${player.name} est passé au tour suivant !`);
-            player.score = playerShot[0];
-            if (player.score === board_enum_1.Board.TWENTY) {
-                console.log(`Le joueur ${player.name} as gagné la partie !`);
-                this.endGame();
+        if (player.score["gates"][playerShot[0]] !== 0) {
+            player.score["gates"][playerShot[0]] =
+                player.score.gates[playerShot[0]] - 1;
+            if (player.score["gates"][playerShot[0]] === 0) {
+                console.log(`${player.name} à fermée sa porte ${playerShot[0]}`);
+                if (!this.gates[playerShot[0]]) {
+                    console.log(`La porte ${playerShot[0]} à été fermée par ${player.name}`);
+                    this.gates[playerShot[0]] = true;
+                    player.score.score += playerShot[0];
+                }
             }
-            return;
+        }
+        //Test du score pour la win
+        let playerGatesStr = "";
+        Object.keys(player.score.gates).map((element) => {
+            playerGatesStr += player.score.gates[element];
+        });
+        console.log(playerGatesStr);
+        if (playerGatesStr === "0000000") {
+            console.log(`${player.name} à fermé toutes les portes ! La partie est terminé.`);
+            this.endGame();
         }
     }
 }
-exports.AroundTheWorld = AroundTheWorld;
+exports.Cricket = Cricket;
