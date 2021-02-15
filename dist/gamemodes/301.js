@@ -19,7 +19,6 @@ class ThreeHundredOne extends gamemode_1.GameModeBase {
     }
     startGame() {
         return __awaiter(this, void 0, void 0, function* () {
-            // TODO: Refactoring logs when production
             do {
                 let playingPlayer = this.players[this.turn % this.players.length];
                 console.log(`---------------------------`);

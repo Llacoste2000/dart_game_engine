@@ -39,7 +39,6 @@ class Cricket extends gamemode_1.GameModeBase {
     }
     startGame() {
         return __awaiter(this, void 0, void 0, function* () {
-            // TODO: Refactoring logs when production
             do {
                 let playingPlayer = this.players[this.turn % this.players.length];
                 console.log(`---------------------------`);
@@ -63,7 +62,6 @@ class Cricket extends gamemode_1.GameModeBase {
      * @param playerShot - The shot informations of the current playing player
      */
     checkStage(player, playerShot) {
-        //TODO: Gérer les tirs pour le mode de jeu Cricket
         if (playerShot[0] === board_enum_1.Board["MISSED"]) {
             console.log(`${player.name} à raté son tir !`);
             return;

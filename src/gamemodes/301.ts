@@ -14,7 +14,6 @@ export class ThreeHundredOne extends GameModeBase {
 	}
 
 	async startGame(): Promise<void> {
-		// TODO: Refactoring logs when production
 		do {
 			let playingPlayer = this.players[this.turn % this.players.length];
 			console.log(`---------------------------`);
