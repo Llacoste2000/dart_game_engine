@@ -39,7 +39,7 @@ export class ThreeHundredOne extends GameModeBase {
 	 * @param {Player} player - the player shooting
 	 * @param playerShot - The shot informations of the current playing player
 	 */
-	checkStage(player: Player, playerShot: any) {
+	checkStage(player: Player, playerShot: any): void {
 		let shotScore;
 
 		if (playerShot[0] === Board["MISSED"]) {
